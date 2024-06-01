@@ -1,3 +1,12 @@
+from core.models.students import Student
+
+def test_student_repr():
+    # Create an instance of Student
+    student = Student(id=1)
+
+    # Check the __repr__ output
+    assert repr(student) == '<Student 1>'
+
 def test_get_assignments_student_1(client, h_student_1):
     response = client.get(
         '/student/assignments',
