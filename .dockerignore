@@ -1,0 +1,27 @@
+# Ignore Python cache files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ignore virtual environment
+env/
+
+# Ignore log, csv, json, and markdown files
+*.log
+*.csv
+*.json
+*.md
+
+# Ignore Git directory
+.git
+
+# Ignore compiled Python and C files
+*.pyc
+*.so
+*.so.*
+*.dyLib
+
+# Ignore macOS directory
+.DS_Store

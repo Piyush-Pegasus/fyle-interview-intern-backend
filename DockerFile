@@ -1,11 +1,11 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim-buster
+FROM python:3.8
 
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Add the current directory contents into the container at /app
-ADD . /app
+# This copies the contents of the current directory on your local machine (the first .) into the /app directory in the Docker container (the second .).
+COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -15,3 +15,17 @@ EXPOSE 7755
 
 # Run app.py when the container launches
 CMD ["bash", "run.sh"]
+
+
+#create an image of the project using following command in the powershell 
+#docker build -t <imagename>:latest .
+#create and run a container of the image using following command in the powershell 
+#docker run -p containerport : localmachineport --name <container_name> <image_name>:latest
+#now the server will start
+
+#to run test cases open terminal of the project using the following command in another powershell 
+#docker exec -it <container_name> /bin/sh
+#now you are inside the container you can the test case commands 
+#pytest -vvv -s tests/
+#pytest --cov
+#etc.
