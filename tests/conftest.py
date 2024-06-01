@@ -55,7 +55,6 @@ def h_teacher_2():
 
     return headers
 
-
 @pytest.fixture
 def h_principal():
     headers = {

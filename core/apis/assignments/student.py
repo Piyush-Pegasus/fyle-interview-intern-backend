@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint,abort
 from core import db
 from core.apis import decorators
 from core.apis.responses import APIResponse
@@ -23,6 +23,12 @@ def list_assignments(p):
 def upsert_assignment(p, incoming_payload):
     """Create or Edit an assignment"""
     assignment = AssignmentSchema().load(incoming_payload)
+    # Check if content is None 
+    #first modification
+    if assignment.content is None:
+        abort(400, 'Content of an assignment cannot be None')
+
+    assignment.student_id = p.student_id
     assignment.student_id = p.student_id
 
     upserted_assignment = Assignment.upsert(assignment)
@@ -43,6 +49,7 @@ def submit_assignment(p, incoming_payload):
         teacher_id=submit_assignment_payload.teacher_id,
         auth_principal=p
     )
+
     db.session.commit()
     submitted_assignment_dump = AssignmentSchema().dump(submitted_assignment)
     return APIResponse.respond(data=submitted_assignment_dump)
